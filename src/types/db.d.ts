@@ -7,3 +7,14 @@ interface User {
     image: string
     id: string
 }
+
+interface TimeSheet {
+    lineItems: LineItem[]
+    description: string
+    rate: number
+}
+
+interface LineItem {
+    date: string
+    minutes: number
+}
