@@ -1,20 +1,26 @@
 'use client'
 import ToDashButton from '@/components/ToDashButton'
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { PlusSquare, XSquare } from 'lucide-react'
+import { Loader2, PlusSquare, XSquare } from 'lucide-react'
 import toast from 'react-hot-toast'
+import axios from 'axios'
 
 
 const page: FC = ({}) => {
 
+    const [totalTime, setTotalTime] = useState(0);
+    const [totalCost, setTotalCost] = useState(0);
+    const [showSuccessState, setShowSuccessState] = useState<boolean>(false)
     const [lineItems, setLineItems] = useState<LineItem[]>([ {date: '', minutes: 0 }])
     const [description, setDescription] = useState<string>()
     const [rate, setRate] = useState<number>()
     const [timeSheet, setTimeSheet] = useState<TimeSheet>({
         lineItems: lineItems,
         description: '',
-        rate: NaN
+        rate: NaN,
+        totalTime: 0,
+        totalCost: 0
     })
 
     const addLineItem = () => {
@@ -29,6 +35,7 @@ const page: FC = ({}) => {
         }
     }
 
+    // Function for changing line item values for database when user changes them on the page
     const handleInputChange = (index: number, name: keyof LineItem, value: string | number) => {
         const updatedLineItems = [...lineItems]
         if (name === 'date' && typeof(value) == 'string') {
@@ -50,14 +57,44 @@ const page: FC = ({}) => {
         timeSheet.rate = value
     }
 
+    // Posts timesheet to Redis database when 'Submit' btn. is clicked
     const handleSubmit = async () => {
-
         if ( description === undefined || rate === undefined ) {
             toast.error("Please fill in required forms")
         } else {
-            console.log(timeSheet)
+            // [UI for user] loading submission
+            setShowSuccessState(false);
+            try {
+                await axios.post('/api/timesheet/add', {
+                    timeSheet: timeSheet
+                })
+                // Refresh page once current timesheet is submitted
+                window.location.reload()    
+            } catch (error) {
+                toast.error("Error saving timesheet to database.")
+            } finally {
+                // [UI for user] finished loading
+                setShowSuccessState(true) 
+            }
         }
     }
+
+    // Calculate total time whenever lineItems change
+    useEffect(() => {
+        const calculatedTotalTime = timeSheet.lineItems.reduce((total, item) => total + item.minutes, 0);
+        setTotalTime(calculatedTotalTime);
+        timeSheet.totalTime = calculatedTotalTime
+      }, [timeSheet.lineItems]);
+    
+
+    // Calculate total cost whenever rate or total time changes
+    // Round to second decimal point for UI clarity and reconvert from string back to float
+    useEffect(() => {
+        const calculatedTotalCost = parseFloat(((totalTime * timeSheet.rate) / 60).toFixed(2))
+        setTotalCost(calculatedTotalCost);
+        timeSheet.totalCost = calculatedTotalCost
+      }, [totalTime, timeSheet.rate]);
+    
     
     return (
         <main className='flex flex-col items-center justify-between w-full min-h-screen p-6'>
@@ -98,11 +135,12 @@ const page: FC = ({}) => {
                                     />
                                 </div>
                                 <div className='flex'>
+                                    <a className='mx-2'>minutes:</a>
                                     <input
                                         type='number'
-                                        placeholder='minutes' 
+                                        placeholder='60' 
                                         className='w-24'
-                                        onChange={(e) => handleInputChange(index, 'minutes', parseInt(e.target.value))}
+                                        onChange={(e) => handleInputChange(index, 'minutes', parseFloat(e.target.value))}
                                     />
                                 </div>
                             </li>
@@ -122,23 +160,33 @@ const page: FC = ({}) => {
                     <label>Set Hourly Rate: </label>
                     <a>$</a>
                     <input 
-                        type='text'
+                        type='number'
                         placeholder='25'
-                        className='w-10 text-center border-2'
-                        onChange={(e) => handleRateChange(parseInt(e.target.value))}
+                        className='w-16 text-center border-2'
+                        onChange={(e) => handleRateChange(parseFloat(e.target.value))}
                     />
                     <a> / hour</a>
+                </div>
+                <div>
+                    Total Time: {isNaN(totalTime) ? 0 : totalTime} minutes
+                </div>
+                <div>
+                    Total Cost: ${isNaN(totalCost) ? 0 : totalCost}
                 </div>
             </div>
 
             <div className='flex flex-col items-center justify-between w-full max-w-[40rem]'>
                 <motion.button 
                         onClick={handleSubmit}
-                        className='bg-slate-200 font-bold my-16 w-full max-w-40 py-2 rounded-md'
+                        className='flex items-center justify-center bg-slate-200 font-bold my-16 w-full max-w-40 py-2 rounded-md'
                         whileTap={{ scale: 0.9 }}
                         whileHover={{ scale: 1.05, backgroundColor: 'rgb(206 202 210)' }}
                     >
-                        Submit
+                        {showSuccessState ? (
+                            <Loader2 className='animate-spin' />
+                        ): (
+                            <a>Submit</a>
+                        )}
                 </motion.button>
 
                 <ToDashButton />
