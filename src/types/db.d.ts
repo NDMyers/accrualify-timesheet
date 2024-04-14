@@ -12,6 +12,8 @@ interface TimeSheet {
     lineItems: LineItem[]
     description: string
     rate: number
+    totalTime: number
+    totalCost: number
 }
 
 interface LineItem {
