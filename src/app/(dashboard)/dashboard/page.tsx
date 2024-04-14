@@ -23,7 +23,7 @@ const page = async ({}) => {
         </h1>
       </div>
 
-      <div className='flex w-full max-w-[120rem] justify-evenly text-md lg:text-2xl'>
+      <div className='flex w-full max-w-[120rem] justify-evenly items-center text-md lg:text-2xl'>
         <AddTimeSheetButton />
         <ViewTimeSheetsButton />
       </div>

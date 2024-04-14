@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 import axios from 'axios'
 
 
-const page: FC = ({}) => {
+const Page: FC = ({}) => {
 
     const [totalTime, setTotalTime] = useState(0);
     const [totalCost, setTotalCost] = useState(0);
@@ -84,7 +84,7 @@ const page: FC = ({}) => {
         const calculatedTotalTime = timeSheet.lineItems.reduce((total, item) => total + item.minutes, 0);
         setTotalTime(calculatedTotalTime);
         timeSheet.totalTime = calculatedTotalTime
-      }, [timeSheet.lineItems]);
+      }, [timeSheet]);
     
 
     // Calculate total cost whenever rate or total time changes
@@ -93,7 +93,7 @@ const page: FC = ({}) => {
         const calculatedTotalCost = parseFloat(((totalTime * timeSheet.rate) / 60).toFixed(2))
         setTotalCost(calculatedTotalCost);
         timeSheet.totalCost = calculatedTotalCost
-      }, [totalTime, timeSheet.rate]);
+      }, [totalTime, timeSheet]);
     
     
     return (
@@ -195,4 +195,4 @@ const page: FC = ({}) => {
     )
 }
 
-export default page
+export default Page
