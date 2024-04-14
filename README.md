@@ -1,8 +1,8 @@
 A coding assessment developed for ACCRUALIFY by NICK MYERS.
 
-## Background info
+## Quick Overview
 
-1. Tech stack includes: TypeScript, Next.js14, TailwindCSS
+1. [TECH STACK]: TypeScript, Next.js14, TailwindCSS
 
 ## To deploy on your local environment
 
