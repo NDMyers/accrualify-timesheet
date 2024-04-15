@@ -39,11 +39,13 @@ This project runs on secured environment variable NOT shared in the Git reposito
 will not properly run without them.
 
 These variables are:
-UPSTASH_REDIS_REST_URL
-UPSTASH_REDIS_REST_TOKEN
-NEXTAUTH_SECRET
-GOOGLE_CLIENT_ID
-GOOGLE_CLIENT_SECRET
+```
+1. UPSTASH_REDIS_REST_URL
+2. UPSTASH_REDIS_REST_TOKEN
+3. NEXTAUTH_SECRET
+4. GOOGLE_CLIENT_ID
+5. GOOGLE_CLIENT_SECRET
+```
 
 To solve this, import your own Redis database token/url, Google API 
 
