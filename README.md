@@ -47,7 +47,7 @@ These variables are:
 5. GOOGLE_CLIENT_SECRET
 ```
 
-To solve this, import your own Redis database token/url, Google API 
+To solve this, import your own Upstash Redis database token/url, Google API client ID/Secret, and create your own NEXTAUTH_SECRET which can be any value you want for security.
 
 ## To test deployed version online
 
