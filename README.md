@@ -2,7 +2,7 @@ A coding assessment developed for ACCRUALIFY by NICK MYERS.
 
 ## Quick Overview
 
-1. [TECH STACK]: TypeScript, Next.js14, TailwindCSS, Vercel (for web deployment)
+1. [TECH STACK]: TypeScript, Next.js14, TailwindCSS, Git, Vercel (for web deployment)
 2. Description: User's sign in to authenticated accounts via Google and can add, delete and view timesheets they create which are stored and fetched with API calls to an online Redis database.
 
 ## Features Accomplished
