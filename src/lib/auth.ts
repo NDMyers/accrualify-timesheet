@@ -59,7 +59,6 @@ export const authOptions: NextAuthOptions = {
                 picture: dbUser.image
             }
         },
-
         // When session is verified via getServerSession(authOptions)
         // these attributes are returned if token is valid
         async session({ session, token }) {
@@ -71,7 +70,6 @@ export const authOptions: NextAuthOptions = {
             }
             return session
         },
-
         redirect() {
             return '/dashboard'
         },
