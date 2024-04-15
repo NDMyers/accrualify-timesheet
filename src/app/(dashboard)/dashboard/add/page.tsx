@@ -32,7 +32,12 @@ const Page: FC = ({}) => {
             const updatedLineItems = [...lineItems]
             updatedLineItems.pop()
             setLineItems(updatedLineItems)
-        }
+            // Updates lineItem values for timesheet as well
+            setTimeSheet((timeSheet) => ({
+                ...timeSheet,
+                lineItems: updatedLineItems
+            }))
+        } 
     }
 
     // Function for changing line item values for database when user changes them on the page
@@ -59,11 +64,11 @@ const Page: FC = ({}) => {
 
     // Posts timesheet to Redis database when 'Submit' btn. is clicked
     const handleSubmit = async () => {
+        // [UI for user] loading submission
+        setShowSuccessState(false);
         if ( description === undefined || rate === undefined ) {
             toast.error("Please fill in the required forms description and rate")
         } else {
-            // [UI for user] loading submission
-            setShowSuccessState(false);
             try {
                 await axios.post('/api/timesheet/add', {
                     timeSheet: timeSheet
@@ -87,7 +92,6 @@ const Page: FC = ({}) => {
             ...timeSheet,
             totalTime: calculatedTotalTime
         }))
-        // timeSheet.totalTime = calculatedTotalTime
       }, [timeSheet.lineItems]);
     
 
@@ -96,7 +100,6 @@ const Page: FC = ({}) => {
     useEffect(() => {
         const calculatedTotalCost = parseFloat(((totalTime * timeSheet.rate) / 60).toFixed(2))
         setTotalCost(calculatedTotalCost);
-        // timeSheet.totalCost = calculatedTotalCost
         setTimeSheet((prevTimeSheet) => ({
             ...prevTimeSheet,
             totalCost: calculatedTotalCost

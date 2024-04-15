@@ -1,4 +1,5 @@
 'use client'
+
 // Component meant to render hot text from react-hot-toast for user messages/error
 // Must be a client component wrap since react-hot-toast renders client side, not server-side
 

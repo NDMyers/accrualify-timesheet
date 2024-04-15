@@ -8,6 +8,7 @@ interface User {
     id: string
 }
 
+// Database objects 
 interface TimeSheet {
     lineItems: LineItem[]
     description: string

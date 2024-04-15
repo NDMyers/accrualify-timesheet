@@ -48,7 +48,7 @@ const Page: FC<PageProps> = ({}) => {
                         <Loader2 className='animate-spin mr-2'/>
                     ) :
                     (
-                        // Google Logo SVG
+                        // Google Logo SVGw
                         <svg
                             className='mr-2 h-4 w-4'
                             aria-hidden='true'

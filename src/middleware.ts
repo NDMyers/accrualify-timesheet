@@ -17,6 +17,7 @@ export default withAuth(
         const sensitiveRoutes = ['/dashboard']
         const isAccessingSensitiveRoute = sensitiveRoutes.some((route) => pathname.startsWith(route))
 
+        // If authenticated and logged in, direct user to their dashboard rather than the login page
         if( isLoginPage ) {
             if( isAuth ) {
                 return NextResponse.redirect(new URL('/dashboard', req.url))
@@ -25,6 +26,7 @@ export default withAuth(
             return NextResponse.next()
         }
 
+        // Auto redirect to login page rather than dashboard if not authenticated yet
         if( !isAuth && isAccessingSensitiveRoute ) {
             return NextResponse.redirect(new URL('/login', req.url))
         }

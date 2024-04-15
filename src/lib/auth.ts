@@ -3,6 +3,7 @@ import { UpstashRedisAdapter } from "@next-auth/upstash-redis-adapter";
 import { db } from "./db";
 import GoogleProvider from "next-auth/providers/google"
 
+// Fetches Google API environment variables from .env.local
 function getGoogleCredentials() {
     const clientId = process.env.GOOGLE_CLIENT_ID
     const clientSecret = process.env.GOOGLE_CLIENT_SECRET
@@ -25,8 +26,10 @@ export const authOptions: NextAuthOptions = {
         strategy: 'jwt'
     },
     pages: {
+        // Where authentication occurs, page-wise
         signIn: '/login'
     },
+    // Only authentication provider for this program is Google
     providers: [
         GoogleProvider({
             clientId: getGoogleCredentials().clientId,
@@ -34,6 +37,7 @@ export const authOptions: NextAuthOptions = {
         }),
     ],
     callbacks: {
+        // Controlling what should be returned when authenticated and logged in
         async jwt ({ token, user }) {
             const dbUserResult = ( await db.get(`user:${user}`)) as
                 | string
@@ -56,6 +60,8 @@ export const authOptions: NextAuthOptions = {
             }
         },
 
+        // When session is verified via getServerSession(authOptions)
+        // these attributes are returned if token is valid
         async session({ session, token }) {
             if( token ) {
                 session.user.id = token.id,

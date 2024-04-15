@@ -17,6 +17,7 @@ export async function POST(req: Request) {
         }
 
         // Post new timesheet to user's database
+        // nanoid() generates randomzied ID for object
         db.sadd(`user:${session.user.id}:timesheets`, {id: nanoid(), timeSheet: body})
 
         return new Response('OK', { status: 200 })
