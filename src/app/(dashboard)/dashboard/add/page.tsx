@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import { Loader2, PlusSquare, XSquare } from 'lucide-react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-import Link from 'next/link'
 
 
 const Page: FC = ({}) => {
@@ -61,7 +60,7 @@ const Page: FC = ({}) => {
     // Posts timesheet to Redis database when 'Submit' btn. is clicked
     const handleSubmit = async () => {
         if ( description === undefined || rate === undefined ) {
-            toast.error("Please fill in required forms")
+            toast.error("Please fill in the required forms description and rate")
         } else {
             // [UI for user] loading submission
             setShowSuccessState(false);
@@ -106,9 +105,9 @@ const Page: FC = ({}) => {
     
     
     return (
-        <main className='flex flex-col items-center justify-between w-full min-h-screen p-6'>
+        <main className='flex flex-col items-center justify-between w-full py-12 text-sm lg:text-xl'>
 
-            <div className='flex flex-col'>
+            <div className='flex flex-col max-w-sm lg:max-w-xl'>
                 <div className='flex items-center justify-center pb-4'>
                     <motion.button 
                         className='flex self-center justify-center w-1/2'

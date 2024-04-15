@@ -29,7 +29,6 @@ const Page: FC<PageProps> = ({}) => {
 
     return (
         <>
-
             <div className='flex items-center justify-center min-h-full py-12 px-4 sm:px-6 lg:px-8'>
                 <div className='flex flex-col items-center w-full max-w-md space-y-8'>
                     <div className='flex flex-col items-center gap-8'>
@@ -83,7 +82,6 @@ const Page: FC<PageProps> = ({}) => {
                     </motion.button>
                 </div>
             </div>
-
         </>
     );
 

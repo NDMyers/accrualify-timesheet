@@ -43,12 +43,12 @@ const page = async () => {
     )
 
     return (
-        <main className='flex flex-col items-center justify-between w-full min-h-screen p-6'>
+        <main className='flex flex-col items-center justify-between w-full p-6 text-sm lg:text-xl'>
             <div>
                 {results.length > 0 ? (
                     <div>{retrievedTimesheets}</div>
                 ) : (
-                    <div className='pt-40 text-2xl text-center'>
+                    <div className='py-40 text-2xl text-center'>
                         No timesheets to view
                         <br></br>
                         Return to dashboard to add one
