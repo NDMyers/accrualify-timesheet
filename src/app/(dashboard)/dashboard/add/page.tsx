@@ -110,7 +110,7 @@ const Page: FC = ({}) => {
             <div className='flex flex-col max-w-sm lg:max-w-xl'>
                 <div className='flex items-center justify-center pb-4'>
                     <motion.button 
-                        className='flex self-center justify-center w-1/2'
+                        className='flex self-center items-center justify-center w-1/2'
                         onClick={addLineItem}
                         whileTap={{ scale: 0.9 }}
                         whileHover={{ scale: 1.05, color: 'rgb(10 165 109)'}}>
@@ -119,7 +119,7 @@ const Page: FC = ({}) => {
                     </motion.button>
                     {lineItems.length > 1 && (
                         <motion.button
-                        className='flex self-center justify-center w-1/2'
+                        className='flex self-center items-center justify-center w-1/2'
                         onClick={deleteLineItem}
                         whileTap={{ scale: 0.9 }}
                         whileHover={{ scale: 1.05, color: 'rgb(219 38 38)'}}>
