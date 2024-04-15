@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Loader2, PlusSquare, XSquare } from 'lucide-react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
+import Link from 'next/link'
 
 
 const Page: FC = ({}) => {
@@ -83,8 +84,12 @@ const Page: FC = ({}) => {
     useEffect(() => {
         const calculatedTotalTime = timeSheet.lineItems.reduce((total, item) => total + item.minutes, 0);
         setTotalTime(calculatedTotalTime);
-        timeSheet.totalTime = calculatedTotalTime
-      }, [timeSheet]);
+        setTimeSheet((timeSheet) => ({
+            ...timeSheet,
+            totalTime: calculatedTotalTime
+        }))
+        // timeSheet.totalTime = calculatedTotalTime
+      }, [timeSheet.lineItems]);
     
 
     // Calculate total cost whenever rate or total time changes
@@ -92,8 +97,12 @@ const Page: FC = ({}) => {
     useEffect(() => {
         const calculatedTotalCost = parseFloat(((totalTime * timeSheet.rate) / 60).toFixed(2))
         setTotalCost(calculatedTotalCost);
-        timeSheet.totalCost = calculatedTotalCost
-      }, [totalTime, timeSheet]);
+        // timeSheet.totalCost = calculatedTotalCost
+        setTimeSheet((prevTimeSheet) => ({
+            ...prevTimeSheet,
+            totalCost: calculatedTotalCost
+          }));
+      }, [totalTime, timeSheet.rate]);
     
     
     return (

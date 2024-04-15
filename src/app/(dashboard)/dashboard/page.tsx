@@ -1,10 +1,8 @@
-import AddTimeSheetButton from '@/components/AddTimeSheetButton'
 import SignOutButton from '@/components/SignOutButton'
-import ViewTimeSheetsButton from '@/components/ViewTimeSheetsButton'
+import { motion } from 'framer-motion'
 import { authOptions } from '@/lib/auth'
-import { Sign } from 'crypto'
 import { getServerSession } from 'next-auth'
-import { FC } from 'react'
+import Link from 'next/link'
 
 const page = async ({}) => {
 
@@ -24,8 +22,13 @@ const page = async ({}) => {
       </div>
 
       <div className='flex w-full max-w-[120rem] justify-evenly items-center text-md lg:text-2xl'>
-        <AddTimeSheetButton />
-        <ViewTimeSheetsButton />
+        <Link href='/dashboard/add' className='border-4 p-6 rounded-lg bg-slate-100 hover:scale-105 hover:bg-[rgb(220,220,220)] transition-colors hover:ease-in-out'>
+            Add Timesheet 
+        </Link>
+        
+        <Link href='/dashboard/view' className='border-4 p-6 rounded-lg bg-slate-100 hover:scale-105 hover:bg-[rgb(220,220,220)] transition-colors hover:ease-in-out'>
+            View Timesheets 
+        </Link>
       </div>
 
       <div className='flex flex-col'>
