@@ -3,6 +3,12 @@ A coding assessment developed for ACCRUALIFY by NICK MYERS.
 ## Quick Overview
 
 1. [TECH STACK]: TypeScript, Next.js14, TailwindCSS
+2. Backend features:
+       - Uploading, fetching, and deletion of user authenticated timesheets in an online Redis database.
+       - Makes API calls to Google Accounts for user account creation
+       - Makes API calls to a Redis database 
+4. Frontend features:
+
 
 ## To deploy on your local environment
 
@@ -36,4 +42,4 @@ A coding assessment developed for ACCRUALIFY by NICK MYERS.
 
 ## To test deployed version online
 
-- Use link: [...] 
+- Use link: [https://accrualify-timesheet.vercel.app/] 
