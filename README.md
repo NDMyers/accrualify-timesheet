@@ -62,4 +62,4 @@ To solve this, import your own Upstash Redis database token/url, Google API clie
 
 ## To test deployed version online
 
-- Use link: [https://accrualify-timesheet.vercel.app/] 
+- Use link: https://accrualify-timesheet.vercel.app/
