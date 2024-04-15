@@ -46,7 +46,7 @@ A coding assessment developed for ACCRUALIFY by NICK MYERS.
     Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Important note for local deployment
-This project runs on secured environment variable NOT shared in the Git repository and thus the program
+This project runs on secured environment variables NOT shared in the Git repository and thus the program
 will not properly run without them.
 
 These variables are:
