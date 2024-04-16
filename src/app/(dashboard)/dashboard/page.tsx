@@ -1,5 +1,4 @@
 import SignOutButton from '@/components/SignOutButton'
-import { motion } from 'framer-motion'
 import { authOptions } from '@/lib/auth'
 import { getServerSession } from 'next-auth'
 import Link from 'next/link'

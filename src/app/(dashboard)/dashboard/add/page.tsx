@@ -5,9 +5,12 @@ import { motion } from 'framer-motion'
 import { Loader2, PlusSquare, XSquare } from 'lucide-react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 
 const Page: FC = ({}) => {
+
+    const router = useRouter()
 
     const [totalTime, setTotalTime] = useState(0);
     const [totalCost, setTotalCost] = useState(0);
@@ -72,9 +75,9 @@ const Page: FC = ({}) => {
             try {
                 await axios.post('/api/timesheet/add', {
                     timeSheet: timeSheet
-                })
+                })  
                 // Refresh page once current timesheet is submitted
-                window.location.reload()    
+                router.push('/dashboard/view') 
             } catch (error) {
                 toast.error("Error saving timesheet to database.")
             } finally {
