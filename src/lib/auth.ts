@@ -40,6 +40,7 @@ export const authOptions: NextAuthOptions = {
                 | null
             
             if( !dbUserResult ) {
+                // If not already in the db as a user, 
                 if( user ) {
                     token.id = user.id
                 }
@@ -55,6 +56,7 @@ export const authOptions: NextAuthOptions = {
                 picture: dbUser.image
             }
         },
+        // Returns session information if token is valid
         async session({ session, token }) {
             if( token ) {
                 session.user.id = token.id,
